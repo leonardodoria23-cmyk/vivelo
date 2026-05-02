@@ -63,8 +63,9 @@ const Vivelo_v5 = () => {
     setAdminRequests(prev => prev.map(r => r.id === id ? { ...r, status: action } : r));
   };
 
+  const sendCode = async (email) => { const code = Math.floor(100000 + Math.random() * 900000).toString(); localStorage.setItem("viveloCode", code); await fetch("/api/send-code", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,code})}); };
   const handleVerify = () => {
-    if (verifyCode.length === 6) { setVerifyError(false); setAuthStep('legal'); }
+    if (verifyCode === localStorage.getItem("viveloCode")) { setVerifyError(false); setAuthStep('legal'); }
     else { setVerifyError(true); }
   };
 
@@ -151,7 +152,7 @@ const Vivelo_v5 = () => {
                 <h2 className="text-2xl font-bold text-center mb-6">Crea tu cuenta</h2>
                 <input type="text" placeholder="Tu nombre completo" value={name} onChange={(e) => setName(e.target.value)} className="w-full px-4 py-4 rounded-xl text-caribbean bg-white text-base" />
                 <input type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-4 py-4 rounded-xl text-caribbean bg-white text-base" />
-                <button onClick={() => { if(email && name) setAuthStep('verify'); }} className="w-full py-4 bg-yellow text-caribbean font-bold rounded-xl hover:bg-orange hover:text-white transition-all">
+                <button onClick={() => { if(email && name){ sendCode(email); setAuthStep('verify'); }}} className="w-full py-4 bg-yellow text-caribbean font-bold rounded-xl hover:bg-orange hover:text-white transition-all">
                   Enviar código de verificación
                 </button>
               </div>
