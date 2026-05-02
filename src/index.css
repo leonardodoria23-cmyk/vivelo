@@ -1,0 +1,5 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@layer base{body{@apply font-sans bg-cream text-caribbean;}h1,h2,h3,h4{@apply font-bold;}}
+@layer components{.btn-primary{@apply px-6 py-3 bg-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all;}.btn-secondary{@apply px-6 py-3 bg-caribbean text-white rounded-lg font-semibold hover:opacity-80 transition-all;}.btn-ghost{@apply px-4 py-2 text-caribbean border border-caribbean rounded-lg hover:bg-caribbean hover:text-white transition-all;}.card{@apply bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow;}}
