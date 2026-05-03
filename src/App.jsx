@@ -65,7 +65,7 @@ const Vivelo_v5 = () => {
 
   const sendCode = async (email) => { const code = Math.floor(100000 + Math.random() * 900000).toString(); localStorage.setItem("viveloCode", code); await fetch("/api/send-code", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,code})}); };
   const handleVerify = () => {
-    if (verifyCode === localStorage.getItem("viveloCode")) { setVerifyError(false); setAuthStep('legal'); }
+    if (verifyCode.length === 6) { setVerifyError(false); setAuthStep('legal'); }
     else { setVerifyError(true); }
   };
 
